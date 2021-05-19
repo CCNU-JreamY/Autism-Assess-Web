@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,24 +17,28 @@ import org.springframework.stereotype.Component;
  **/
 @Aspect
 @Component
-public class WebLogAspect {
+public class WebLogAspect implements Ordered {
 
     private final static Logger LOGGER = LoggerFactory.getLogger("interface");
 
     @Pointcut("execution(public * cn.pavi.aaw.controller..*.*(..))")
     public void webLog() {
-
     }
 
     @Before("webLog()")
-    public void doBefore(JoinPoint point) {
+    public void webLogDoBefore(JoinPoint point) {
 
-        LOGGER.info("before start");
+        LOGGER.info("web log do before");
     }
 
     @AfterReturning(returning = "response", pointcut = "webLog()")
-    public void doAfterReturning(Object response) {
+    public void webLogDoAfterReturning(Object response) {
 
         LOGGER.info("after return");
+    }
+
+    @Override
+    public int getOrder() {
+        return 1;
     }
 }

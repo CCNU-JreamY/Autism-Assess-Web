@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = "cn.pavi.aaw")
+@MapperScan(basePackages = "cn.pavi.aaw.mapper")
 public class WebsiteApplication {
 
     public static void main(String[] args) {

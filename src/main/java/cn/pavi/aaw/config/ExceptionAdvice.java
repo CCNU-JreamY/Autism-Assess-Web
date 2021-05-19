@@ -29,7 +29,7 @@ public class ExceptionAdvice {
     @ExceptionHandler(Exception.class)
     public Object exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {
 
-        LOGGER.error("全局异常拦截成功");
+        LOGGER.error("全局异常拦截成功, {}", exception);
         return null;
     }
 }

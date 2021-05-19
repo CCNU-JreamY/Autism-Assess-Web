@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 public enum Error {
 
-    TEMPLATE("mini-err01", "对外错误描述模板");
+    PARAMCHECK_ERROR("mini-aaw01", "参数错误");
 
 
     /**

@@ -2,11 +2,17 @@ package cn.pavi.aaw.annotation;
 
 import cn.pavi.aaw.config.postvalidator.enums.ValidatorEnum;
 
+import java.lang.annotation.*;
+
 /**
  * @Description: POST请求参数验证
  * @Author: JreamY
  * @Date: 2021/5/17
  **/
+@Documented
+@Target(ElementType.METHOD)
+@Repeatable(PostValidators.class)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface PostValidator {
 
     /**
