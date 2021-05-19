@@ -79,6 +79,14 @@
         </dependency>
         <!-- HttpClient end -->
 
+        <!-- nacos start -->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <version>0.2.3</version>
+        </dependency>
+        <!-- nacos end -->
+
     </dependencies>
 
     <build>
