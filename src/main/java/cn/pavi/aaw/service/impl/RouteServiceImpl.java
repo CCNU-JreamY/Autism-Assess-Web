@@ -26,7 +26,7 @@ public class RouteServiceImpl implements IRouteService {
     @Override
     public Response routeService(Request request) {
 
-        IBusinessService businessService = businessServiceMap.get(request.getServiceId());
+        IBusinessService businessService = businessServiceMap.get(request.get("serviceId"));
         if (businessService == null) {
             LogUtils.info("businessService is null: {}", request.getServiceId());
             return Response.newFailure(Error.PARAMCHECK_ERROR, PrivDesc.ROUTE_SERVICEID_ERROR);
