@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum PrivDesc {
 
-    TEMPLATE("aaw-priv01", "内部错误记录模板");
+    ROUTE_SERVICEID_ERROR("aaw-priv01", "serviceId有误");
 
     private final String code;
     private final String desc;
