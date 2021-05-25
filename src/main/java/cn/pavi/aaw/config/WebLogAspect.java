@@ -2,6 +2,7 @@ package cn.pavi.aaw.config;
 
 import cn.pavi.aaw.bean.request.Request;
 import cn.pavi.aaw.constant.Constant;
+import cn.pavi.aaw.util.FlakeUtils;
 import cn.pavi.aaw.util.JSONUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -10,8 +11,10 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
@@ -39,11 +42,15 @@ public class WebLogAspect implements Ordered {
             return;
         }
         Request request = (Request) arguments[0];
+        if (StringUtils.isEmpty(request.getTransactionId())) {
+            request.setTransactionId(FlakeUtils.nextWorkerId());
+        }
+        MDC.put(Constant.MDC.TRANSACTION_ID, request.getTransactionId());
         request.setServiceId((String) request.get(Constant.Request.SERVICE_ID));
         request.setParam((Map) request.get(Constant.Request.PARAM));
+        LOGGER.info("request: {}", JSONUtils.toJSON(request));
         request.put(Constant.Request.SERVICE_ID, null);
         request.put(Constant.Request.PARAM, null);
-        LOGGER.info("request: {}", JSONUtils.toJSON(request));
     }
 
     @AfterReturning(returning = "response", pointcut = "webLog()")

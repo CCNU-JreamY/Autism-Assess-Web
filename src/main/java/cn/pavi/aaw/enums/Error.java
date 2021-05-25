@@ -12,7 +12,11 @@ import lombok.Getter;
 @Getter
 public enum Error {
 
-    PARAMCHECK_ERROR("aaw-err01", "参数错误");
+    CUSTOM_SYSTEM_ERROR("aaw-err01", "系统异常"),
+
+    SYSTEM_ERROR("aaw-err02", "系统异常"),
+
+    PARAMCHECK_ERROR("aaw-err03", "参数错误");
 
 
     /**

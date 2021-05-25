@@ -19,4 +19,11 @@ public interface Constant {
     interface Param {
 
     }
+
+    /**
+     * Logback MDC ： LRU
+     */
+    interface MDC {
+        String TRANSACTION_ID = "transactionId";
+    }
 }

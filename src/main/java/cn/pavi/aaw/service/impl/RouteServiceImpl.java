@@ -34,13 +34,13 @@ public class RouteServiceImpl implements IRouteService {
 
         Response response = Response.newSuccess();
         businessService.validate(request, response);
-        if (!response.isSuccess()) {
+        if (!response.statusOk()) {
             LogUtils.info(this.getClass(), "businessService validate fail");
             return response;
         }
 
         businessService.doBusiness(request, response);
-        if (!response.isSuccess()) {
+        if (!response.statusOk()) {
             LogUtils.info(this.getClass(), "businessService doBusiness fail");
             return response;
         }

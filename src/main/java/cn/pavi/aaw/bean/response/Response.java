@@ -81,7 +81,7 @@ public class Response implements Serializable {
         return this;
     }
 
-    public boolean isSuccess() {
+    public boolean statusOk() {
         return SUCCESS.equals(this.resultCode);
     }
 }

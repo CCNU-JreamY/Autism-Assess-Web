@@ -63,7 +63,7 @@ public class HttpUtils {
                     return null;
                 }
             } catch (Exception e) {
-                LogUtils.error(HttpUtils.class, "doHttpPost error: {}", e);
+                LogUtils.error("doHttpPost error: {}", e);
                 if (--failRetry == 0) {
                     willReturn = true;
                     return null;

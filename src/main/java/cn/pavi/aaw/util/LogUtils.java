@@ -16,9 +16,10 @@ public class LogUtils {
     private LogUtils() {
     }
 
-    private final static LogUtils logUtils = new LogUtils();
-
     private static Map<Class, Logger> container;
+
+    private static Logger ERROR_LOG = LoggerFactory.getLogger("error");
+    private static Logger INTER_LOG = LoggerFactory.getLogger("interface");
 
     static {
         container = new HashMap<>(64);
@@ -29,8 +30,12 @@ public class LogUtils {
         getLogger(clazz).info(pattern, params);
     }
 
-    public static void error(Class clazz, String pattern, Object... params) {
-        getLogger(clazz).error(pattern, params);
+    public static void inter(String pattern, Object... params) {
+        INTER_LOG.info(pattern, params);
+    }
+
+    public static void error(String pattern, Object... params) {
+        ERROR_LOG.error(pattern, params);
     }
 
     private static Logger getLogger(Class clazz) {
