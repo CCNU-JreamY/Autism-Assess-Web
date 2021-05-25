@@ -26,22 +26,22 @@ public class RouteServiceImpl implements IRouteService {
     @Override
     public Response routeService(Request request) {
 
-        IBusinessService businessService = businessServiceMap.get(request.get("serviceId"));
+        IBusinessService businessService = businessServiceMap.get(request.getServiceId());
         if (businessService == null) {
-            LogUtils.info("businessService is null: {}", request.getServiceId());
+            LogUtils.info(this.getClass(), "businessService is null: {}", request.getServiceId());
             return Response.newFailure(Error.PARAMCHECK_ERROR, PrivDesc.ROUTE_SERVICEID_ERROR);
         }
 
         Response response = Response.newSuccess();
         businessService.validate(request, response);
         if (!response.isSuccess()) {
-            LogUtils.info("businessService validate fail");
+            LogUtils.info(this.getClass(), "businessService validate fail");
             return response;
         }
 
         businessService.doBusiness(request, response);
         if (!response.isSuccess()) {
-            LogUtils.info("businessService doBusiness fail");
+            LogUtils.info(this.getClass(), "businessService doBusiness fail");
             return response;
         }
 

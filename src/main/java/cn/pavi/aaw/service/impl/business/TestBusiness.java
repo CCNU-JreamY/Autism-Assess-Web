@@ -20,17 +20,17 @@ public class TestBusiness<Request, Response> implements IBusinessService<Request
     @Override
     public void validate(Request request, Response response) {
 
-        LogUtils.info("testBusiness validate");
+        LogUtils.info(this.getClass(), "testBusiness validate");
     }
 
     @Override
     public void doBusiness(Request request, Response response) {
-        LogUtils.info("testBusiness doBusiness");
+        LogUtils.info(this.getClass(), "testBusiness doBusiness");
         testMapper.insert();
     }
 
     @Override
     public void postBusiness(Response response) {
-        LogUtils.info("testBusiness postBusiness");
+        LogUtils.info(this.getClass(), "testBusiness postBusiness");
     }
 }

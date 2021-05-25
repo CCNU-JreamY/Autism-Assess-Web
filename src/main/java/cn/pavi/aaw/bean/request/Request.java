@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description: 通用请求类
@@ -26,6 +27,6 @@ public class Request extends HashMap<String, Object> implements Serializable {
     /**
      * 参数列表
      */
-    private String param;
+    private Map<String, Object> param;
 
 }

@@ -19,7 +19,7 @@ public class RequiredValidator implements IValidator {
 
         for (String variate : variates) {
             if (ParamUtils.paramCheckNull(request.get(variate))) {
-                LogUtils.info("param -> {} is null", variates);
+                LogUtils.info(this.getClass(), "param -> {} is null", variates);
                 return Response.newFailure(Error.PARAMCHECK_ERROR);
             }
         }
