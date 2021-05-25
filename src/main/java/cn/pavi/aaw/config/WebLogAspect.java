@@ -48,8 +48,7 @@ public class WebLogAspect implements Ordered {
 
     @AfterReturning(returning = "response", pointcut = "webLog()")
     public void webLogDoAfterReturning(Object response) {
-
-        LOGGER.info("after return");
+        LOGGER.info("response: {}", JSONUtils.toJSON(response));
     }
 
     @Override

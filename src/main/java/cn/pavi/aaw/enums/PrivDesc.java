@@ -3,6 +3,11 @@ package cn.pavi.aaw.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * @Description: 对内错误码和错误描述：aaw-privXX形式
+ * @Author: JreamY
+ * @Date: 2021/5/25
+ */
 @AllArgsConstructor
 @Getter
 public enum PrivDesc {
