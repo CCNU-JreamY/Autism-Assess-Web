@@ -5,13 +5,10 @@
     <springProperty scope="context" name="log.startlogpath" source="logging.startlogpath"/>
     <springProperty scope="context" name="logLevel" source="logging.level.root"/>
     <property name="log.app" value="${log.base}/app"/>
-    <property name="log.access" value="${log.base}/access"/>
     <property name="log.interface" value="${log.base}/interface"/>
     <property name="log.druid" value="${log.base}/druid"/>
-    <property name="log.remote" value="${log.base}/remote"/>
     <!-- warn级别以上日志 -->
     <property name="log.error" value="${log.base}/error"/>
-    <property name="log.other" value="${log.startlogpath}"/>
     <!--  print in console true , in actiion false -->
     <property name="additivity.value" value="true"/>
 
@@ -20,24 +17,6 @@
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS}[%level][%logger][%X{transactionId}]-%m%n</pattern>
         </layout>
-    </appender>
-
-    <!-- 监控 -->
-    <appender name="accessapender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${log.access}/access.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>
-                ${log.access}/access.log.%d{yyyy-MM-dd-HH}.%i
-            </FileNamePattern>
-            <TimeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <MaxFileSize>5MB</MaxFileSize>
-            </TimeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS}[%level][%logger][%X{transactionId}]-%m%n</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
     </appender>
 
     <!-- 应用 -->
@@ -67,25 +46,6 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>
                 ${log.error}/error.log.%d{yyyy-MM-dd-HH}.%i
-            </FileNamePattern>
-            <TimeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <MaxFileSize>5MB</MaxFileSize>
-            </TimeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS}[%level][%logger][%X{transactionId}]-%m%n</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-
-
-    <!-- 其他 -->
-    <appender name="other" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${log.other}/simple-server.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>
-                ${log.other}/simple-server.log.%d{yyyy-MM-dd-HH}.%i
             </FileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -137,30 +97,6 @@
         </encoder>
     </appender>
 
-    <appender name="log-http-interface" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-        <File>${log.remote}/http/interface.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>
-                ${log.remote}/http/interface.log.%d{yyyy-MM-dd-HH}.%i
-            </FileNamePattern>
-            <TimeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <MaxFileSize>5MB</MaxFileSize>
-            </TimeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <Pattern>[%date{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %-5level [%logger{0}] %X{transactionId} -
-                %msg%n
-            </Pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-
     <!-- jdbc 线程池 -->
     <logger name="com.alibaba.druid" additivity="${additivity.value}" level="INFO">
         <appender-ref ref="druid"/>
@@ -180,14 +116,6 @@
         <appender-ref ref="interface"/>
     </logger>
 
-    <logger name="access" additivity="${additivity.value}" level="${logLevel}">
-        <appender-ref ref="accessapender"/>
-    </logger>
-
-    <logger name="other" additivity="${additivity.value}" level="${logLevel}">
-        <appender-ref ref="other"/>
-    </logger>
-
     <logger name="error" additivity="${additivity.value}" level="${logLevel}">
         <appender-ref ref="error"/>
     </logger>
@@ -201,8 +129,6 @@
         <appender-ref ref="stdout"/>
     </root>
 
-    <logger name="org.apache.curator" level="ERROR"/>
-    <logger name="org.apache.commons" level="ERROR"/>
     <logger name="java.sql.Connection" level="${logLevel}"/>
     <logger name="java.sql.PreparedStatement" level="${logLevel}"/>
 </configuration>
