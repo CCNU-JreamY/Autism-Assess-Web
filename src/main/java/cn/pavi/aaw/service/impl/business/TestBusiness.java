@@ -1,6 +1,8 @@
 package cn.pavi.aaw.service.impl.business;
 
 import cn.pavi.aaw.bean.exception.SystemException;
+import cn.pavi.aaw.bean.request.Request;
+import cn.pavi.aaw.bean.response.Response;
 import cn.pavi.aaw.enums.PrivDesc;
 import cn.pavi.aaw.mapper.TestMapper;
 import cn.pavi.aaw.service.IBusinessService;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2021/5/24
  **/
 @Service("testBusiness")
-public class TestBusiness<Request, Response> implements IBusinessService<Request, Response> {
+public class TestBusiness implements IBusinessService<Request, Response> {
 
     @Autowired
     private TestMapper testMapper;
