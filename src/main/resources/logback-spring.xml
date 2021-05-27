@@ -103,12 +103,12 @@
     </logger>
     <!-- spring 框架 -->
     <logger name="org.springframework" additivity="${additivity.value}" level="INFO">
-        <appender-ref ref="other"/>
+        <appender-ref ref="app"/>
         <appender-ref ref="stdout"/>
     </logger>
     <!-- apache 配置框架 -->
     <logger name="org.apache" additivity="${additivity.value}" level="INFO">
-        <appender-ref ref="other"/>
+        <appender-ref ref="app"/>
     </logger>
 
     <!-- 接口日志打印 -->
@@ -118,10 +118,6 @@
 
     <logger name="error" additivity="${additivity.value}" level="${logLevel}">
         <appender-ref ref="error"/>
-    </logger>
-
-    <logger name="log-http-interface" additivity="${additivity.value}" level="logLevel">
-        <appender-ref ref="log-http-interface"/>
     </logger>
 
     <root level="${logLevel}">
