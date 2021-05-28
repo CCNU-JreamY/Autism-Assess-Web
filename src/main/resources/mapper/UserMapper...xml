@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="cn.pavi.aaw.mapper.UserMapper">
+    <!--  配置插入操作后 获取插入数据的id  keyColumn对应表 另一个对象实体类-->
+    <!-- 插入用户        -->
+
+    <insert id="addUser" parameterType="UserEntity" useGeneratedKeys="true">
+
+        <selectKey keyProperty="uid" keyColumn="uid" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        insert into user(openId,address,gender) values(#{openId},#{address},#{gender});
+    </insert>
+
+</mapper>

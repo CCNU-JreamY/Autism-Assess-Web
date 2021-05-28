@@ -8,4 +8,5 @@
         INSERT INTO TBL_TEST_INFO(ID) VALUES(1)
     </insert>
 
+
 </mapper>
