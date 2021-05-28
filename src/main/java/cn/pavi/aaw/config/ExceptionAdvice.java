@@ -1,12 +1,13 @@
 package cn.pavi.aaw.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cn.pavi.aaw.bean.exception.SystemException;
+import cn.pavi.aaw.bean.response.Response;
+import cn.pavi.aaw.enums.Error;
+import cn.pavi.aaw.util.JSONUtils;
+import cn.pavi.aaw.util.LogUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @Description: 全局异常拦截配置类
@@ -16,12 +17,24 @@ import javax.servlet.http.HttpServletResponse;
 @ControllerAdvice
 public class ExceptionAdvice {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger("error");
+    @ExceptionHandler(SystemException.class)
+    @ResponseBody
+    public Response systemExceptionHandler(SystemException exception) {
+
+        LogUtils.error("系统自定义异常拦截：{}", exception.toString());
+        Response response = Response.newFailure(Error.CUSTOM_SYSTEM_ERROR, exception.getPrivDesc());
+        response.setErrorDesc(exception.getPubDesc());
+        LogUtils.inter("response: {}", JSONUtils.toJSON(response));
+        return response;
+    }
 
     @ExceptionHandler(Exception.class)
-    public Object exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
+    @ResponseBody
+    public Object exceptionHandler(Exception exception) {
 
-        LOGGER.error("全局异常拦截成功");
-        return null;
+        LogUtils.error("系统异常拦截: 异常描述 -> {}, 异常位置 -> {}", exception.getMessage(), exception.getStackTrace()[0]);
+        Response response = Response.newFailure(Error.SYSTEM_ERROR);
+        LogUtils.inter("response: {}", JSONUtils.toJSON(response));
+        return response;
     }
 }

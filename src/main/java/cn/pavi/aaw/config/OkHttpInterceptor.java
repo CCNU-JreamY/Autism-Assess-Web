@@ -30,7 +30,9 @@ public class OkHttpInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
 
         Request request = chain.request();
+        // todo: do something before http
         Response response = chain.proceed(request);
+        // todo: do something after http
         return response;
     }
 }
