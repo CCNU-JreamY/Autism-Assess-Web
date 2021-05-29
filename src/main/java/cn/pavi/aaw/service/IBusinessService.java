@@ -5,6 +5,11 @@ import cn.pavi.aaw.bean.response.Response;
 
 public interface IBusinessService<Q extends Request, P extends Response> {
 
+    /**
+     * 是否要返回data数据
+     *
+     * @return
+     */
     default boolean dataResponse() {
         return false;
     }
