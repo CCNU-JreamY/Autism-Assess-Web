@@ -18,6 +18,11 @@ public class DataResponse extends Response {
 
     private Map<String, Object> data;
 
+    public static DataResponse newSuccess() {
+        DataResponse response = new DataResponse();
+        return (DataResponse) response.setSuccess();
+    }
+
     public static DataResponse newSuccess(Map<String, Object> data) {
         Response response = Response.newSuccess();
         ((DataResponse) response).setData(data);

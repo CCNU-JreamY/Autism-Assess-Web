@@ -1,6 +1,7 @@
 package cn.pavi.aaw.service.impl;
 
 import cn.pavi.aaw.bean.request.Request;
+import cn.pavi.aaw.bean.response.DataResponse;
 import cn.pavi.aaw.bean.response.Response;
 import cn.pavi.aaw.enums.Error;
 import cn.pavi.aaw.enums.PrivDesc;
@@ -32,21 +33,22 @@ public class RouteServiceImpl implements IRouteService {
             return Response.newFailure(Error.PARAMCHECK_ERROR, PrivDesc.ROUTE_SERVICEID_ERROR);
         }
 
-        Response response = Response.newSuccess();
-        businessService.validate(request, response);
+        boolean needData = businessService.dataResponse();
+        Response response = needData ? DataResponse.newSuccess() : Response.newSuccess();
+        businessService.validate(request, needData ? (DataResponse) response : response);
         if (!response.statusOk()) {
             LogUtils.info(this.getClass(), "businessService validate fail");
-            return response;
+            return needData ? (DataResponse) response : response;
         }
 
-        businessService.doBusiness(request, response);
+        businessService.doBusiness(request, needData ? (DataResponse) response : response);
         if (!response.statusOk()) {
             LogUtils.info(this.getClass(), "businessService doBusiness fail");
-            return response;
+            return needData ? (DataResponse) response : response;
         }
 
-        businessService.postBusiness(response);
-        return response;
+        businessService.postBusiness(needData ? (DataResponse) response : response);
+        return needData ? (DataResponse) response : response;
     }
 
 }

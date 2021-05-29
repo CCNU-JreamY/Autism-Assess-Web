@@ -1,6 +1,13 @@
 package cn.pavi.aaw.service;
 
-public interface IBusinessService<Q, P> {
+import cn.pavi.aaw.bean.request.Request;
+import cn.pavi.aaw.bean.response.Response;
+
+public interface IBusinessService<Q extends Request, P extends Response> {
+
+    default boolean dataResponse() {
+        return false;
+    }
 
     /**
      * 业务前置参数校验
