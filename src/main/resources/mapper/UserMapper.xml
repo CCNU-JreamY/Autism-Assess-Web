@@ -7,12 +7,15 @@
     <!--  配置插入操作后 获取插入数据的id  keyColumn对应表 另一个对象实体类-->
     <!-- 插入用户        -->
 
-    <insert id="addUser" parameterType="UserEntity" useGeneratedKeys="true">
+    <insert id="addUser" parameterType="cn.pavi.aaw.bean.entity.UserEntity" useGeneratedKeys="true">
 
         <selectKey keyProperty="uid" keyColumn="uid" resultType="int" order="AFTER">
             select last_insert_id();
         </selectKey>
-        insert into user(openId,address,gender) values(#{openId},#{address},#{gender});
+        insert into tbl_user_info(open_id,user_address) values(#{openId},#{address});
     </insert>
+<!--    <insert id="addUser">-->
+<!--        INSERT INTO TBL_TEST_INFO(ID) VALUES(10)-->
+<!--    </insert>-->
 
 </mapper>
