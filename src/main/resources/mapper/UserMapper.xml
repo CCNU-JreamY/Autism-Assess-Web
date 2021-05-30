@@ -12,7 +12,7 @@
         <selectKey keyProperty="uid" keyColumn="uid" resultType="int" order="AFTER">
             select last_insert_id();
         </selectKey>
-        insert into tbl_user_info(open_id,user_address) values(#{openId},#{address});
+        insert into tbl_user_info(open_id,user_address) values(#{openId},#{address}a;
     </insert>
 <!--    <insert id="addUser">-->
 <!--        INSERT INTO TBL_TEST_INFO(ID) VALUES(10)-->
